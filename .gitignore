@@ -1,0 +1,7 @@
+target
+*~
+Cargo.lock
+.vscode/
+c1.txt
+FALSTAFF.txt
+optimCoupons.txt

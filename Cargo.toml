@@ -1,0 +1,40 @@
+[package]
+
+name = "easigrow"
+version = "2.0.0"
+description = "A fatigue crack growth matching program"
+license = "MIT"
+authors = ["Paul White <paul.white.melb@gmail.com>"]
+readme = "README.md"
+documentation = "README"
+publish = false
+edition = '2018'
+
+[[bin]]
+name = "easigrow"
+path = "src/main.rs"
+
+[lib]
+name = "fatigue"
+path = "src/lib.rs"
+
+[dependencies]
+env_logger = "0.6.1"
+log = "0.4"
+clap = "2.32.0"
+rayon = "1.0.3"
+svg = "0.5.12"
+clippy = {version = "*", optional = true}
+bspline = "0.2.2"
+lazy_static = "1.4.0"
+rand = "0.8.4"
+cubic-splines = "0.2.0"
+
+[dev-dependencies]
+tempdir = "0.3"
+
+[features]
+default = []
+
+[profile.release]
+debug = 0
