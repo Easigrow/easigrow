@@ -388,6 +388,9 @@ mod tests {
             beta: BetaResult {a: Some(0.1), c: Some(0.2)},
             length_deltas: CrackLengthDelta {a: Some(0.1), c: Some(0.3)},
             geometry,
+            r: 0.5,
+            peak: 10.0,
+            valley: 5.0,
         }
     }
 

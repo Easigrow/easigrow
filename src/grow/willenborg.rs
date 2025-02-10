@@ -249,6 +249,9 @@ impl Willenborg {
             stress: scale,
             beta: beta_result,
             geometry: new_geometry,
+            r: smin / smax,
+            peak: scale * cycle.max.value,
+            valley: scale * cycle.min.value,
         }
     }
 

@@ -262,6 +262,9 @@ mod tests {
                 c: None,
                 ratio: None,
             },
+            r: 0.0,
+            peak: 0.0,
+            valley: 0.0,
         };
 
         for b in 5..10 {

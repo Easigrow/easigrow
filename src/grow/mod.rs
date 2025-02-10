@@ -67,6 +67,12 @@ pub struct History {
     pub length_deltas: CrackLengthDelta,
     /// overall geometry
     pub geometry: CrackGeometry,
+    /// R ratio
+    pub r: f64,
+    /// Cycle peak value
+    pub peak: f64,
+    /// Cycle valley value
+    pub valley: f64,
 }
 
 /// A stripped down version of history to be used with optimisations
@@ -213,6 +219,9 @@ impl History {
             beta,
             length_deltas: CrackLengthDelta::default(),
             geometry,
+            r: 0.0,
+            peak: 0.0,
+            valley: 0.0,
         }
     }
 }
@@ -384,11 +393,7 @@ pub fn display_history_line(his: &History, output: &[String], component: &Compon
                 Some(dk_c) => print!("{:12.4} ", dk_c),
                 None => print!("{:>12} ", "N/A"),
             },
-            "R" => if his.cycle.max.index == usize::MAX {
-                print!("{:>12} ", "N/A")
-            } else {
-                print!("{:12.4} ", his.cycle.min.value / his.cycle.max.value)
-            },
+            "R" => print!("{:12.4} ", his.r),
             "beta_a" => match his.beta.a {
                 Some(beta_a) => print!("{:12.4e} ", beta_a),
                 None => print!("{:>12} ", "N/A"),
@@ -423,16 +428,8 @@ pub fn display_history_line(his: &History, output: &[String], component: &Compon
                 Some(dc) => print!("{:12.4e} ", dc),
                 None => print!("{:>12} ", "N/A"),
             },
-            "peak" => if his.cycle.max.index == usize::MAX {
-                print!("{:>12} ", "N/A")
-            } else {
-                print!("{:12.6} ", his.stress * his.cycle.max.value)
-            },
-            "valley" =>if his.cycle.max.index == usize::MAX {
-                print!("{:>12} ", "N/A")
-            } else {
-                 print!("{:12.6} ", his.stress * his.cycle.min.value)
-            },
+            "peak" => print!("{:12.6} ", his.peak),
+            "valley" => print!("{:12.6} ", his.valley),
             ref opt => {
                 println!(
                     "Error: Unknown output option (use the --list option for a complete list): {}",
