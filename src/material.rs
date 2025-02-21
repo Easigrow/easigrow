@@ -638,6 +638,25 @@ lazy_static! {
             },
         );
 
+        name = "lin_lower_th_5b:dst24-aa7085t7452";
+        materials.insert(
+            name,
+            EqnProperty {
+                name,
+                cite: "[]",
+                units: LinLowerTh5B::UNITS,
+                params: BTreeMap::from([
+                    (ParameterLabel::a, 1.997),
+                    (ParameterLabel::b, 4.057e-10),
+                    (ParameterLabel::c1, -0.416),
+                    (ParameterLabel::c2, 0.387),
+                    (ParameterLabel::d, -4070.0),
+                    (ParameterLabel::deltak_th, 8.19e-5),
+                    (ParameterLabel::k_ut, 94898.0),
+                ]),
+            },
+        );
+
         // Material: 7085t7452-CA
         name = "lin_lower_th_6:default";
         materials.insert(
