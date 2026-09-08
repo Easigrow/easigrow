@@ -62,7 +62,6 @@ pub enum ParameterLabel {
     c1,
     c2,
     cth,
-    cth_minus,
     deltak_th,
     deltak0,
     k_crit,
@@ -96,7 +95,6 @@ impl ParameterLabel {
             ParameterLabel::c1 => "c1",
             ParameterLabel::c2 => "c2",
             ParameterLabel::cth => "cth",
-            ParameterLabel::cth_minus => "cth_minus",
             ParameterLabel::deltak_th => "deltak_th",
             ParameterLabel::deltak0 => "deltak0",
             ParameterLabel::k_crit => "k_crit",
@@ -124,7 +122,6 @@ impl ParameterLabel {
             "c1" => Some(ParameterLabel::c1),
             "c2" => Some(ParameterLabel::c2),
             "cth" => Some(ParameterLabel::cth),
-            "cth_minus" => Some(ParameterLabel::cth_minus),
             "deltak_th" => Some(ParameterLabel::deltak_th),
             "deltak0" => Some(ParameterLabel::deltak0),
             "k_crit" => Some(ParameterLabel::k_crit),
@@ -769,6 +766,9 @@ impl DaDn for Nasgro {
         let deltak_th = self.deltak0 * (state.a / (state.a + self.a_intr)).sqrt()
             / ((1.0 - f) / ((1.0 - a0) * (1.0 - r))).powf(1.0 + self.cth * r);
 
+        if delta_k < deltak_th {
+            return 0.0
+        }
         info!("nasgro: deltak_th {}", deltak_th);
         let num = (1.0 - (deltak_th.min(delta_k - 1e-6) / delta_k)).powf(self.p);
         let denom = (1.0 - (kmax / self.k_crit)).powf(self.q);
