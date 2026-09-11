@@ -770,7 +770,7 @@ impl DaDn for Nasgro {
             return 0.0
         }
         info!("nasgro: deltak_th {}", deltak_th);
-        let num = (1.0 - (deltak_th.min(delta_k - 1e-6) / delta_k)).powf(self.p);
+        let num = (1.0 - (deltak_th / delta_k)).powf(self.p);
         let denom = (1.0 - (kmax / self.k_crit)).powf(self.q);
         let dadn = self.c * (((1.0 - f) / (1.0 - r)) * delta_k).powf(self.n) * num / denom;
         info!("nasgro: dadn {} {} {}", dadn, num, denom);
